@@ -1,0 +1,39 @@
+imports:
+    - https://raw.githubusercontent.com/dotnet/crank/main/src/Microsoft.Crank.Jobs.Bombardier/bombardier.yml
+
+jobs:
+  server:
+    source:
+      # repository: C:\Users\Mikołaj\source\repos\CalendarAPI
+      # branchOrCommit: crank
+      # project: Appointment.Api\Appointment.Api.csproj
+      localFolder: C:\Users\Mikołaj\source\repos\CalendarAPI
+      project: Appointment.Api\Appointment.Api.csproj
+
+scenarios:
+  hello:
+    application:
+      job: server
+    load:
+      job: bombardier
+      variables:
+        serverPort: 5000
+        verb: POST
+        path: /api/room
+        body: '\"{\"name\":\"rooomcajs\"}\"'
+        customHeaders: [
+          'Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0ZTM1NWY1OS04Yjg4LTQzMjAtODhmMi0zODQzOGEwMzNhMDciLCJzdWIiOiIxNzAwOCIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoiMTcwNDA1MTg5NCIsIm5iZiI6MTcwNDA1MTg5NCwiZXhwIjoxNzA0MDU1NDk0LCJpc3MiOiJhcHAifQ.YRGwHkr1cCY0xK55pXuJhKmIv2OrotB-9R_SQyEscr8',
+          'Content-Type: text/json'
+      ]
+
+profiles:
+  local:
+    variables:
+      serverAddress: localhost
+    jobs: 
+      application:
+        endpoints: 
+          - http://localhost:5010
+      load:
+        endpoints: 
+          - http://localhost:5010

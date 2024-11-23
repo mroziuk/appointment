@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "identityapp1": {
+      "connectionInfo": "App registration: visual-studio-local, Tenant: Default Directory (mikolajmroziukgmail.onmicrosoft.com - Microsoft Entra ID)",
+      "type": "identityapp.default"
+    },
+    "secrets1": {
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/lic-vault",
+      "type": "secrets.keyVault",
+      "connectionId": "VaultUri"
+    }
+  }
+}

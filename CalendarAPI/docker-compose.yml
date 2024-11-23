@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  appointment.api:
+    image: ${DOCKER_REGISTRY-}appointmentapi
+    container_name: appointment.api
+    build:
+      context: .
+      dockerfile: Appointment.Api/Dockerfile
+    ports:
+    - "5000:5000"
+    - "5001:5001"
+  appointment.database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: appointment.database
+    environment:
+      - MSSQL_SA_PASSWORD=Admin123.
+      - ACCEPT_EULA=Y
+    volumes:
+      - ./.containers/appointment-db:/var/opt/mssql/data
+    ports:
+      - "1433:1433"
